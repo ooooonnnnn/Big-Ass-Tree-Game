@@ -92,7 +92,11 @@ public class SFPSC_PlayerMovement : MonoBehaviour
 
         if (!enableMovement)
             return;
-        inputForce = (transform.forward * vInput + transform.right * hInput).normalized * (Input.GetKey(SFPSC_KeyManager.Run) ? runSpeed : walkSpeed);
+
+        //enable this to have sprinting
+        // float targetSpeed = (Input.GetKey(SFPSC_KeyManager.Run) ? runSpeed : walkSpeed);
+        float targetSpeed = runSpeed;
+        inputForce = (transform.forward * vInput + transform.right * hInput).normalized * targetSpeed;
 
         if (isGrounded)
         {
