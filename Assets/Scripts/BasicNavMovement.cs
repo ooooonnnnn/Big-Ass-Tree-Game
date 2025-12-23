@@ -20,8 +20,8 @@ public class BasicNavMovement : MonoBehaviour
        
         
            
-            navMeshAgent.agentTypeID = 1;
-            navMeshAgent.SetDestination(Back.position);
+           // navMeshAgent.agentTypeID = 1;
+            //navMeshAgent.SetDestination(Back.position);
         
     }
     private void OnTriggerEnter(Collider other)
