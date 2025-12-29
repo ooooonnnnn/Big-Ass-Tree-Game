@@ -9,8 +9,6 @@
     █▄▄ █▄█   ▀█▀ █ █ █▀▀   █▀▄ █▀▀ █ █ █▀▀ █   █▀█ █▀█ █▀▀ █▀█
     █▄█  █     █  █▀█ ██▄   █▄▀ ██▄ ▀▄▀ ██▄ █▄▄ █▄█ █▀▀ ██▄ █▀▄
 */
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SFPSC_PlayerMovement))]
@@ -28,7 +26,7 @@ public class SFPSC_WallRun : MonoBehaviour
     public float cameraTiltAngle = 10.0f; // The angle that the camera tilts when wall running
     public float minSpeedWhenAttached = 10.0f;
     public float t1 = 5.0f, multiplier = 4.5f;
-    public float jumpWallMultiplier = 0.5f, jumpForwardMultiplier = 0.3f, jumpUpMultiplier = 0.2f;
+    public float jumpWallMultiplier = 0.35f, jumpForwardMultiplier = 0.45f, jumpUpMultiplier = 0.5f;
 
     [Header("Block times")]
     public float jumpBlockTime = 0.8f; // The jump function is blocked for this amount of seconds
@@ -43,8 +41,8 @@ public class SFPSC_WallRun : MonoBehaviour
     private Rigidbody rb;
     private void Start()
     {
-        pm = this.GetComponent<SFPSC_PlayerMovement>();
-        rb = this.GetComponent<Rigidbody>();
+        pm = GetComponent<SFPSC_PlayerMovement>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private RaycastHit hitInfo;
@@ -111,6 +109,8 @@ public class SFPSC_WallRun : MonoBehaviour
             rb.AddForce((hitInfo.normal * jumpWallMultiplier + transform.forward * jumpForwardMultiplier + Vector3.up * jumpUpMultiplier).normalized * rb.mass * jumpForce);
             isJumpAvailable = false;
             Invoke(nameof(UnblockJump), jumpBlockTime);
+            StopWallRunning();
+            return;
         }
 
         if (t >= 0.0f)
