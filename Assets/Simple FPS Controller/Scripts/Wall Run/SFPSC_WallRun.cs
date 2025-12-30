@@ -27,6 +27,7 @@ public class SFPSC_WallRun : MonoBehaviour
     public float minSpeedWhenAttached = 10.0f;
     public float t1 = 5.0f, multiplier = 4.5f;
     public float jumpWallMultiplier = 0.35f, jumpForwardMultiplier = 0.45f, jumpUpMultiplier = 0.5f;
+    [SerializeField] private float parralelSpeedTreshold;
 
     [Header("Block times")]
     public float jumpBlockTime = 0.8f; // The jump function is blocked for this amount of seconds
@@ -52,21 +53,22 @@ public class SFPSC_WallRun : MonoBehaviour
         if (!rb.useGravity || blocked)
             return;
 
-        if(Physics.Raycast(startingPosition.position, transform.right, out hitInfo, maxDistanceToWall, layerMask))
+        
+        if (pm.vInput >= .5f)
         {
-            if (pm.vInput >= .5f)
+            if (Physics.Raycast(startingPosition.position, transform.right, out hitInfo, maxDistanceToWall, layerMask))
             {
-                if (!wallRunning)
+                float parralelSpeed = Vector3.Cross(rb.linearVelocity, hitInfo.normal).magnitude;
+                print($"Parralel speed: {parralelSpeed}");
+                if (!wallRunning && parralelSpeed > parralelSpeedTreshold)
                     StartWallRunning();
                 AddForces(hitInfo.normal, true);
                 return;
             }
-        }
-        if(Physics.Raycast(startingPosition.position, -transform.right, out hitInfo, maxDistanceToWall, layerMask))
-        {
-            if (pm.vInput >= .5f)
+
+            if (Physics.Raycast(startingPosition.position, -transform.right, out hitInfo, maxDistanceToWall, layerMask))
             {
-                if (!wallRunning)
+                if (!wallRunning && Vector3.Cross(rb.linearVelocity, hitInfo.normal).magnitude > parralelSpeedTreshold)
                     StartWallRunning();
                 AddForces(hitInfo.normal, false);
                 return;

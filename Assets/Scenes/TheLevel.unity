@@ -30834,7 +30834,7 @@ Transform:
   m_GameObject: {fileID: 1327753955}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -197.26, y: 18.49, z: -14.18}
+  m_LocalPosition: {x: -201.01, y: 31.03, z: -188.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30870,8 +30870,9 @@ MonoBehaviour:
   jumpWallMultiplier: 0.6
   jumpForwardMultiplier: 0.1
   jumpUpMultiplier: 0.3
+  parralelSpeedTreshold: 12
   jumpBlockTime: 0.6
-  attachToWallBlockTime: 1
+  attachToWallBlockTime: 0
 --- !u!114 &1327753958
 MonoBehaviour:
   m_ObjectHideFlags: 0
