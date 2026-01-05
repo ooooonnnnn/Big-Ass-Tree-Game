@@ -3650,8 +3650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec39ce101b75a44ba203f9e9cbaa8b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 8
-  runSpeed: 12
+  walkSpeed: 10
+  runSpeed: 16
   changeInStageSpeed: 10
   maximumPlayerSpeed: 150
   vInput: 0
